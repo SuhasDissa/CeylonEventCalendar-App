@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Ceylon Events Calendar</string>
+    <string name="settings">Settings</string>
+    <string name="sports">Sports</string>
+    <string name="visual_arts">Visual Arts</string>
+    <string name="performing_arts">Drama</string>
+    <string name="workshop">Workshop</string>
+    <string name="lectures_and_books">Literature</string>
+    <string name="competition">Competition</string>
+    <string name="community">Community</string>
+    <string name="educational">Educational</string>
+    <string name="festivals_and_fairs">Festivals</string>
+    <string name="other">Other</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="couldn_t_connect_to_the_server">Couldn\'t connect to the server</string>
+    <string name="search_for_events">Search for Events</string>
+    <string name="no_events_found">No events found</string>
+    <string name="no_saved_events">No saved events</string>
+    <string name="add_event_failed">Failed to add the event</string>
+    <string name="okay">Okay</string>
+    <string name="uploading_event">Uploading Event</string>
+    <string name="add_event_successful">Add event Success</string>
+</resources>
