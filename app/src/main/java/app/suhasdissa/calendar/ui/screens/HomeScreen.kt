@@ -1,6 +1,6 @@
 package app.suhasdissa.calendar.ui.screens
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -10,8 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -26,7 +24,10 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,15 +39,10 @@ import app.suhasdissa.calendar.R
 import app.suhasdissa.calendar.ui.screens.home.EventsPage
 import app.suhasdissa.calendar.ui.screens.home.ExplorePage
 import app.suhasdissa.calendar.ui.screens.home.LibraryPage
-import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(onNavigate: (Destination) -> Unit) {
-    val state = rememberPagerState {
-        3
-    }
-    val scope = rememberCoroutineScope()
+    var page by remember { mutableIntStateOf(0) }
     Scaffold(
         topBar = {
             Row(Modifier.fillMaxWidth()) {
@@ -88,10 +84,8 @@ fun HomeScreen(onNavigate: (Destination) -> Unit) {
         },
         bottomBar = {
             NavigationBar {
-                NavigationBarItem(selected = (state.currentPage == 0), onClick = {
-                    scope.launch {
-                        state.animateScrollToPage(0)
-                    }
+                NavigationBarItem(selected = (page == 0), onClick = {
+                    page = 0
                 }, icon = {
                     Icon(
                         imageVector = Icons.Rounded.Home,
@@ -100,10 +94,8 @@ fun HomeScreen(onNavigate: (Destination) -> Unit) {
                 }, label = {
                     Text("Home")
                 })
-                NavigationBarItem(selected = (state.currentPage == 1), onClick = {
-                    scope.launch {
-                        state.animateScrollToPage(1)
-                    }
+                NavigationBarItem(selected = (page == 1), onClick = {
+                    page = 1
                 }, icon = {
                     Icon(
                         imageVector = Icons.Rounded.Explore,
@@ -112,10 +104,8 @@ fun HomeScreen(onNavigate: (Destination) -> Unit) {
                 }, label = {
                     Text("Explore")
                 })
-                NavigationBarItem(selected = (state.currentPage == 2), onClick = {
-                    scope.launch {
-                        state.animateScrollToPage(2)
-                    }
+                NavigationBarItem(selected = (page == 2), onClick = {
+                    page = 2
                 }, icon = {
                     Icon(
                         imageVector = Icons.Rounded.LibraryBooks,
@@ -128,7 +118,7 @@ fun HomeScreen(onNavigate: (Destination) -> Unit) {
         }
     ) { paddingValues ->
         Column(Modifier.padding(paddingValues)) {
-            HorizontalPager(state = state) {
+            Crossfade(targetState = page, label = "Home page crossfade") {
                 when (it) {
                     0 -> EventsPage()
                     1 -> ExplorePage(onNavigate)

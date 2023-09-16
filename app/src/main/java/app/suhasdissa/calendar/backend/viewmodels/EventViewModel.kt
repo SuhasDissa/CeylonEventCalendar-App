@@ -3,6 +3,7 @@ package app.suhasdissa.calendar.backend.viewmodels
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.provider.CalendarContract
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,6 +49,14 @@ class EventViewModel(eventRepository: EventRepository) : ViewModel() {
             putExtra(CalendarContract.Events.DESCRIPTION, event.description)
             putExtra(CalendarContract.Events.EVENT_LOCATION, event.location)
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }
+        context.startActivity(intent)
+    }
+
+    fun openLocation(context: Context, geoLocation: Uri?) {
+        if (geoLocation == null) return
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = geoLocation
         }
         context.startActivity(intent)
     }
