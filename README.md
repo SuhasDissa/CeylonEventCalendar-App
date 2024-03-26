@@ -1,7 +1,7 @@
 <div align="center">
   <img width="150" src="/app/src/main/res/mipmap-xxxhdpi/ic_launcher.webp" alt="App icon">
   <h1 align="center">Ceylon Event Calendar</h1>
-  <b>Ceylon Event Calendar</b> is the official Android app for Ceylon Event Calendar website.
+  <b>Ceylon Event Calendar</b> is the official Android app for <a href="https://github.com/SuhasDissa/CeylonEventCalendar">Ceylon Event Calendar website</a>.
 </div>
 <br>
 
